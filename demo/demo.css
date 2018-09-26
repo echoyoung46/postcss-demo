@@ -1,4 +1,0 @@
-.title {
-  composes: shake from './animate.css';
-  color: red;
-}

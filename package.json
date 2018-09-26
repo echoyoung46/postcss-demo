@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.config.js"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -16,20 +16,26 @@
   "bugs": {
     "url": "https://github.com/echoyoung46/postcss-demo/issues"
   },
-  "dependencies": {
-    "babel-core": "^6.9.1",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "css-loader": "^0.23.1",
-    "postcss-loader": "^0.9.1",
-    "postcss-modules-values": "^1.1.3",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "homepage": "https://github.com/echoyoung46/postcss-demo#readme"
+  "dependencies": {},
+  "homepage": "https://github.com/echoyoung46/postcss-demo#readme",
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "cssnext": "^1.8.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "postcss": "^7.0.3",
+    "postcss-atroot": "^0.1.3",
+    "postcss-conditionals": "^2.1.0",
+    "postcss-each": "^0.10.0",
+    "postcss-extend": "^1.0.5",
+    "postcss-for": "^2.1.1",
+    "postcss-import": "^12.0.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-simple-vars": "^5.0.1",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  }
 }

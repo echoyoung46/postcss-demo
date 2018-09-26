@@ -1,30 +1,34 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = {
-  entry: __dirname + '/index.js',
+const config = {
+  mode: 'production',
+  entry: [
+    __dirname + '/src/index.js'
+  ],
   output: {
+    filename: 'bundle.js',
+    path: __dirname + '/src',
+    publicPath: '/'
+  },
+  context: __dirname + '/src',
+  devServer: {
+    compress: true,
+    contentBase: __dirname + '/src',
     publicPath: '/',
-    filename: './bundle.js'
+    port: 8080,
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: "style-loader!css-loader?modules"
-      },
-    ]
+    rules: [{
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract('style-loader', 'css-loader?modules', 'postcss-loader')
+    }]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new ExtractTextPlugin("global.css")
   ]
 };
+
+module.exports = config;
