@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== 'production'
 
 const config = {
   mode: 'production',
@@ -21,13 +22,31 @@ const config = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ExtractTextPlugin.extract('style-loader', 'css-loader?modules', 'postcss-loader')
+      exclude: /node_modules/,
+      use: [
+        devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+        'css-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: (loader) => [
+              require('postcss-import')({ root: loader.resourcePath }),
+              require('postcss-preset-env')(),
+              require('cssnano')()
+            ]
+          }
+        }
+      ]
     }]
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin("global.css")
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    })
   ]
 };
 
